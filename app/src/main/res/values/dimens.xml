@@ -47,4 +47,16 @@
     <dimen name="setting_new_password_textview_top_margin">480dp</dimen>
     <dimen name="setting_new_password_top_margin">500dp</dimen>
     <dimen name="setting_submit_button_top_margin">610dp</dimen>
+
+    <!-- Account Profile Page -->
+    <dimen name="profile_list_height">200dp</dimen>
+    <dimen name="profile_item_margin_height">13dp</dimen>
+    <dimen name="profile_image_top_margin">90dp</dimen>
+    <dimen name="profile_email_textview_top_margin">280dp</dimen>
+    <dimen name="profile_setting_button_top_margin">320dp</dimen>
+    <dimen name="profile_most_recent_top_margin">400dp</dimen>
+    <dimen name="profile_line_top_margin">445dp</dimen>
+    <dimen name="profile_list_top_margin">458dp</dimen>
+    <dimen name="profile_view_more_top_margin">670dp</dimen>
+
 </resources>

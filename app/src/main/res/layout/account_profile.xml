@@ -1,14 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/account_profile"
     android:src="@drawable/background2">
 
-    <ImageView android:id="@+id/sign_in_imv"
+    <ImageView
+        android:id="@+id/sign_in_imv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/account_profile"/>
+        android:src="@drawable/background" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/setting_menu_button_top_margin"
+        android:layout_marginLeft="@dimen/button_left_right_margin"
+        android:layout_marginRight="@dimen/button_left_right_margin"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="@dimen/textview_left_margin"
+            android:layout_height="@dimen/button_width_small"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/mainmenu_button" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:text="User Example"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/today"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/setting_image_top_margin"
+                android:background="@drawable/circle_img" />
+
+            <TextView
+                android:id="@+id/profileEmailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/profile_email_textview_top_margin"
+                android:fontFamily="@font/montserrat"
+                android:text="jialiu@gmail.com"
+                android:textColor="@color/light_blue" />
+
+            <Button
+                android:id="@+id/profileSettingButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginLeft="@dimen/button_left_right_margin_large"
+                android:layout_marginTop="@dimen/profile_setting_button_top_margin"
+                android:layout_marginRight="@dimen/button_left_right_margin_large"
+                android:background="@drawable/round_button"
+                android:fontFamily="@font/montserrat"
+                android:text="Account Setting"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/profileMostRecentTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/profile_most_recent_top_margin"
+                android:fontFamily="@font/montserrat"
+                android:text="MOST PLAYED SONGS"
+                android:textColor="@color/light_blue" />
+
+            <View
+                android:id="@+id/profileLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/profile_line_top_margin"
+                android:layout_marginLeft="@dimen/button_left_right_margin"
+                android:layout_marginRight="@dimen/button_left_right_margin"
+                android:background="@color/light_blue" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_list_height"
+                android:layout_marginTop="@dimen/profile_list_top_margin"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/dataRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/song_item" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/profileViewMoreButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height_medium"
+                android:layout_marginLeft="@dimen/button_left_right_margin_larger"
+                android:layout_marginTop="@dimen/profile_view_more_top_margin"
+                android:layout_marginRight="@dimen/button_left_right_margin_larger"
+                android:background="@drawable/round_button_empty"
+                android:fontFamily="@font/montserrat"
+                android:text="View More"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
