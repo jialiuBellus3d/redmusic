@@ -59,4 +59,21 @@
     <dimen name="profile_list_top_margin">458dp</dimen>
     <dimen name="profile_view_more_top_margin">670dp</dimen>
 
+    <!-- Playlist Page -->
+    <dimen name="playlist_item_margin">15dp</dimen>
+    <dimen name="playlist_margin_top">15dp</dimen>
+
+    <!-- Preference Page -->
+    <dimen name="preference_button_height">30dp</dimen>
+    <dimen name="preference_button_padding">5dp</dimen>
+
+    <dimen name="preference_genres_choice_height">120dp</dimen>
+
+    <dimen name="preference_genres_textview_top_margin">260dp</dimen>
+    <dimen name="preference_genres_choice_top_margin">290dp</dimen>
+    <dimen name="preference_timeline_textview_top_margin">435dp</dimen>
+    <dimen name="preference_timeline_slidebar_top_margin">470dp</dimen>
+    <dimen name="preference_time_textview_top_margin">510dp</dimen>
+    <dimen name="preference_start_button_top_margin">610dp</dimen>
+    <dimen name="preference_text_size">16sp</dimen>
 </resources>
