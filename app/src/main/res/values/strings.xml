@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RedMusic</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="forgot_description">We will email you a temporary password. Use the temporary password to sign in and submit a new password via account setting page</string>
+</resources>

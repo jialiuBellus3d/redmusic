@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--<stroke android:width="2dp"-->
+        <!--android:color="#FFFFFF"/>-->
+    <gradient
+        android:angle="225"
+        android:startColor="#062046"
+        android:endColor="#062046"/>
+    <corners
+        android:bottomLeftRadius="@dimen/round_button_radius"
+        android:bottomRightRadius="@dimen/round_button_radius"
+        android:topLeftRadius="@dimen/round_button_radius"
+        android:topRightRadius="@dimen/round_button_radius" />
+</shape>
