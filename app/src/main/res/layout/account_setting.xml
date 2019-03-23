@@ -22,7 +22,7 @@
         android:orientation="horizontal" >
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/settingMenuButton"
             android:layout_width="@dimen/textview_left_margin"
             android:layout_height="@dimen/button_width_small"
             android:layout_marginTop="5dp"

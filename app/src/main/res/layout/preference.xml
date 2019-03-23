@@ -241,7 +241,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/signInButton"
+                android:id="@+id/preferenceStartButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/preference_start_button_top_margin"
