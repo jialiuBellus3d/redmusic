@@ -46,5 +46,13 @@ public class ProfileScreenFragment extends Fragment {
                 mMainActivity.mMenuPopupWindow.showAsDropDown(view, -5, 0);
             }
         });
+
+        Button profileSignOutButton = view.findViewById(R.id.profileSignOutButton);
+        profileSignOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainActivity.mNavigationManager.startSignInFragment();
+            }
+        });
     }
 }

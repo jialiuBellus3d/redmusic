@@ -58,7 +58,7 @@
     <dimen name="profile_most_recent_top_margin">400dp</dimen>
     <dimen name="profile_line_top_margin">445dp</dimen>
     <dimen name="profile_list_top_margin">458dp</dimen>
-    <dimen name="profile_view_more_top_margin">670dp</dimen>
+    <dimen name="profile_view_more_top_margin">600dp</dimen>
 
     <!-- Playlist Page -->
     <dimen name="playlist_button_width">30dp</dimen>
