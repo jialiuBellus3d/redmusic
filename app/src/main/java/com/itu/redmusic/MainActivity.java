@@ -1,9 +1,7 @@
 package com.itu.redmusic;
 
 import android.app.Activity;
-import android.arch.persistence.room.Room;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,10 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,6 +56,7 @@ public class MainActivity extends Activity{
         mMenuList.add("Preference::1");
         mMenuList.add("Playlist::2");
         mMenuList.add("Account::3");
+        mMenuList.add("Player::4");
         mPopUpContents = new String[mMenuList.size()];
         mMenuList.toArray(mPopUpContents);
         mMenuPopupWindow = popupWindowDogs();

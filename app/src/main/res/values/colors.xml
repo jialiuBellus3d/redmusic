@@ -9,4 +9,5 @@
     <color name="dark_blue">#285293</color>
     <color name="bright_blue">#4977B1</color>
     <color name="super_bright_blue">#80CEF5</color>
+    <color name="transparent">#00000000</color>
 </resources>

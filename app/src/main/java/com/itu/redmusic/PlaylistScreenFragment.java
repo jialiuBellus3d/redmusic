@@ -79,7 +79,9 @@ public class PlaylistScreenFragment extends Fragment {
 
                     SongData temp = new SongData(name, artist, score, rank);
                     recommendedData.add(temp);
-                    System.out.println(recommendedData.get(i-1).toString());
+                    mMainActivity.mSongsData.add(new SongData(name, artist, score, rank));
+
+//                    System.out.println(recommendedData.get(i-1).toString());
                 }
             }
         } else {

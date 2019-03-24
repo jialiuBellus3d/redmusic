@@ -79,7 +79,7 @@ public class SignUpScreenFragment extends Fragment {
             User user = userDao.findByEmail(this.user.email);
             if(user==null){
                 Log.e(TAG, "sign up successfully!");
-                userDao.add(user);
+                userDao.add(mMainActivity.mCurrentUser);
                 return 1;
             }
             Log.e(TAG, "sign up failed!");

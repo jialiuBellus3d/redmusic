@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,9 +29,10 @@ public class PlayerScreenFragment extends Fragment {
     private MainActivity mMainActivity;
 
     private static int oTime =0, sTime =0, eTime =0, fTime = 5000, bTime = 5000;
-    TextView startTimeTextView, endTimeTextView;
+    TextView startTimeTextView, endTimeTextView, nameTV, artistTV;
     ProgressBar progressBar;
     private Handler hdlr = new Handler();
+    SongData currentSong;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +48,8 @@ public class PlayerScreenFragment extends Fragment {
 
         startTimeTextView = view.findViewById(R.id.playTimeElapsedTextview);
         endTimeTextView = view.findViewById(R.id.playTimeTotalTextview);
+        nameTV = view.findViewById(R.id.playerName);
+        artistTV = view.findViewById(R.id.playerArtist);
         progressBar = view.findViewById(R.id.playerProgressBar);
 
         final ImageButton playButton = view.findViewById(R.id.playerPlayButton);
@@ -89,8 +93,18 @@ public class PlayerScreenFragment extends Fragment {
 
         final ImageButton previousButton = view.findViewById(R.id.playerPreviousButton);
         final ImageButton nextButton = view.findViewById(R.id.playerNextButton);
-
-
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Random r = new Random();
+                if(mMainActivity.mSongsData.size()-1>0){
+                    int i = r.nextInt(mMainActivity.mSongsData.size()-1);
+                    currentSong = mMainActivity.mSongsData.get(i);
+                    nameTV.setText(currentSong.name);
+                    artistTV.setText(currentSong.artist);
+                }
+            }
+        });
     }
 
     private Runnable UpdateSongTime = new Runnable() {

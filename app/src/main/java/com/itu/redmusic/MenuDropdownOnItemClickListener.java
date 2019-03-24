@@ -37,8 +37,6 @@ public class MenuDropdownOnItemClickListener implements AdapterView.OnItemClickL
         if(selectedItemText.equals("Preference")){
             mainActivity.mNavigationManager.startPreferenceFragment();
         } else if(selectedItemText.equals("Playlist")){
-            Log.e(TAG, "!!!!!!!!!"+ mainActivity.mSongsData.toString());
-
             mainActivity.mNavigationManager.startPlaylistFragment();
         } else if(selectedItemText.equals("Account")){
             mainActivity.mNavigationManager.startProfileFragment();

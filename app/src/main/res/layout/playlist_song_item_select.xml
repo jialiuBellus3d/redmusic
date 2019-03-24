@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginBottom="@dimen/playlist_item_margin"
+    android:clickable="false"
+    android:focusable="false"
+    android:id="@+id/playListItemLayout"
     android:background="@drawable/playlist_item_bg"
     >
 
@@ -11,6 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false"
         android:orientation="vertical">
 
         <TextView
@@ -19,6 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="1"
+            android:clickable="false"
+            android:focusable="false"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/dark_blue" />
     </LinearLayout>
@@ -27,6 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="5"
+        android:clickable="false"
+        android:focusable="false"
         android:orientation="vertical">
 
         <TextView
@@ -35,6 +44,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/dark_blue"
+            android:clickable="false"
+            android:focusable="false"
             android:text="Linkin Park" />
 
         <TextView
@@ -42,6 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
+            android:clickable="false"
+            android:focusable="false"
             android:text="In the end" />
 
     </LinearLayout>
@@ -50,6 +63,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false"
         android:orientation="vertical">
 
         <TextView
@@ -58,6 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="3:49"
+            android:clickable="false"
+            android:focusable="false"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/dark_blue" />
     </LinearLayout>
@@ -66,6 +83,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false"
         android:orientation="vertical">
 
         <ImageView
@@ -73,7 +92,9 @@
             android:layout_width="@dimen/button_height_medium"
             android:layout_height="@dimen/button_height_medium"
             android:layout_gravity="center"
-            android:background="@drawable/add_new" />
+            android:background="@drawable/add_new"
+            android:clickable="false"
+            android:focusable="false"/>
     </LinearLayout>
 
 </LinearLayout>
