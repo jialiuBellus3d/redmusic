@@ -62,23 +62,37 @@ public class PlaylistScreenFragment extends Fragment {
     }
 
     public void readDatasets(){
-        InputStream inputStream = getResources().openRawResource(R.raw.export);
-        CSVFile csvFile = new CSVFile(inputStream);
-        List scoreList = csvFile.read();
-        for (int i = 0; i < scoreList.size(); i++) {
-            String[] res = (String[]) scoreList.get(i);
-            if(res[3].equals("rank")) {
-                continue;
-            } else {
-                int rank = Integer.parseInt(res[3]);
-                float score = Float.parseFloat(res[2]);
-                String[] artistAndSong = res[1].split(" - ");
-                String artist = artistAndSong[0];
-                String name = artistAndSong[1];
+        if(mMainActivity.mSongsData.size() == 0){
+            InputStream inputStream = getResources().openRawResource(R.raw.export);
+            CSVFile csvFile = new CSVFile(inputStream);
+            List scoreList = csvFile.read();
+            for (int i = 0; i < scoreList.size(); i++) {
+                String[] res = (String[]) scoreList.get(i);
+                if(res[3].equals("rank")) {
+                    continue;
+                } else {
+                    int rank = Integer.parseInt(res[3]);
+                    float score = Float.parseFloat(res[2]);
+                    String[] artistAndSong = res[1].split(" - ");
+                    String artist = artistAndSong[0];
+                    String name = artistAndSong[1];
 
-                SongData temp = new SongData(name, artist, score, rank);
-                recommendedData.add(temp);
-                System.out.println(recommendedData.get(i-1).toString());
+                    SongData temp = new SongData(name, artist, score, rank);
+                    recommendedData.add(temp);
+                    System.out.println(recommendedData.get(i-1).toString());
+                }
+            }
+        } else {
+            for (int i = 0; i < mMainActivity.mSongsData.size(); i++) {
+                SongData songData = mMainActivity.mSongsData.get(i);
+                if(songData.rank == 0){
+                    continue;
+                }
+                int rank = songData.rank;
+                float score = songData.score;
+                String artist = songData.artist;
+                String name = songData.name;
+                recommendedData.add(new SongData(name, artist, score, rank));
             }
         }
     }

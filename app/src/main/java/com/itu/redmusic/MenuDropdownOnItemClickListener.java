@@ -7,9 +7,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import static java.lang.Integer.*;
 
 /**
  * Created by Jia Liu on 3/23/2019.
@@ -36,14 +33,17 @@ public class MenuDropdownOnItemClickListener implements AdapterView.OnItemClickL
         String selectedItemText = ((TextView) v).getText().toString();
 
         // get the id
-        Toast.makeText(mContext, "ID is: " + ((TextView) v).getTag().toString(), Toast.LENGTH_SHORT).show();
         Log.e(TAG, selectedItemText);
         if(selectedItemText.equals("Preference")){
             mainActivity.mNavigationManager.startPreferenceFragment();
         } else if(selectedItemText.equals("Playlist")){
+            Log.e(TAG, "!!!!!!!!!"+ mainActivity.mSongsData.toString());
+
             mainActivity.mNavigationManager.startPlaylistFragment();
         } else if(selectedItemText.equals("Account")){
             mainActivity.mNavigationManager.startProfileFragment();
+        } else if(selectedItemText.equals("Player")){
+            mainActivity.mNavigationManager.startPlayerFragment();
         } else {
         }
     }

@@ -87,6 +87,10 @@ public class PlayerScreenFragment extends Fragment {
             }
         });
 
+        final ImageButton previousButton = view.findViewById(R.id.playerPreviousButton);
+        final ImageButton nextButton = view.findViewById(R.id.playerNextButton);
+
+
     }
 
     private Runnable UpdateSongTime = new Runnable() {

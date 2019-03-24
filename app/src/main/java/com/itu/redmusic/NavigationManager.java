@@ -8,6 +8,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.util.Log;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Navigate across different fragments.
  */

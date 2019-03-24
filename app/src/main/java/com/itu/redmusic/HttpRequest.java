@@ -42,8 +42,6 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
     private MainActivity mMainActivity;
     String url;
     String userId;
-    Response mResponse;
-    ArrayList<SongData> mSongsData;
     SongData currentSongData;
 
     public HttpRequest(MainActivity activity, String url, String uid){
@@ -51,8 +49,6 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
         mMainActivity = activity;
         this.url = url;
         this.userId = uid;
-        mResponse = new Response();
-        mSongsData = new ArrayList<SongData>();
         currentSongData = new SongData();
     }
 
@@ -101,19 +97,19 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
             // 4. make POST request to the given URL
             conn.connect();
 
-            mResponse.code = conn.getResponseCode();
-
-            switch (mResponse.code) {
+            switch (conn.getResponseCode()) {
                 case 200:
                 case 201:
-//                    java.util.Scanner s = new java.util.Scanner(conn.getInputStream()).useDelimiter("\\A");
-//                    Log.e(TAG,s.hasNext() ? s.next() : "");
-                    parseResponse(conn.getInputStream());
+                    ArrayList<SongData> songsData = parseResponse(conn.getInputStream());
+                    for(int i = 0; i<songsData.size(); i++){
+                        SongData data = songsData.get(i);
+                        mMainActivity.mSongsData.add(new SongData(data.name, data.artist, data.score, data.rank));
+                    }
+                    Log.e(TAG, "~~~~~~~~~~~"+ mMainActivity.mSongsData.size());
                     return 1;
             }
             // 5. return response message
             Log.e(TAG, conn.getResponseMessage() + "");
-            Log.e(TAG, mSongsData.toString());
             return 0;
         } catch (MalformedURLException e){
             e.printStackTrace();
@@ -148,23 +144,25 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
     }
 
     private void updateResponse(String header, String content) {
-        if (header == "song") {
+        if (header.equals("song")) {
             String[] temps = content.split(" - ");
             if (temps.length == 2){
                 currentSongData.name = temps[1];
                 currentSongData.artist = temps[0];
             }
         }
-        else if (header == "score") {
+        else if (header.equals("score")) {
             currentSongData.score = Float.parseFloat(content);
         }
-        else if (header == "ranked") {
+        else if (header.equals("ranked")) {
             currentSongData.rank = Integer.parseInt(content);
         }
     }
 
 
-    private void parseResponse(InputStream inputStream) throws IOException {
+    private ArrayList<SongData> parseResponse(InputStream inputStream) throws IOException {
+        ArrayList<SongData> mSongsData = new ArrayList<SongData>();
+
         BufferedReader bReader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         StringBuilder builder = new StringBuilder();
@@ -174,7 +172,11 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
             int counterHeader = -1;
             int counterContent = -1;
             boolean colonShownUp = false;
-            for (int i = 0; i < line.length(); i++){
+            int counterQ = 0;
+            int counterC = 0;
+
+            // ignore front and end {}
+            for (int i = 1; i < line.length()-1;){
                 char c = line.charAt(i);
                 //Process char
                 if (c == '{') {
@@ -182,45 +184,62 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
                     continue;
                 }
                 else if (c == ':') {
-                    colonShownUp = true;
-                    counterContent = 0;
+                    counterC++;
+                    if(counterC%5 != 1){
+                        colonShownUp = true;
+                        counterContent = 0;
+                    }
                     i++;
                     continue;
                 }
 				else if (c == '"') {
-                    if (colonShownUp) {
-                        if (counterContent < 0) {
-                            counterContent = 0;
-                        }
-                    }
-                    else {
-                        if (counterHeader < 0) {
-                            counterHeader = 0;
-                        }
-                        else {
-                            counterHeader = -1;
+                    counterQ++;
+                    if(counterQ%14 != 1 && counterQ%14 != 2) {
+                        if (colonShownUp) {
+                            if (counterContent < 0) {
+                                counterContent = 0;
+                            }
+                        } else {
+                            if (counterHeader < 0) {
+                                counterHeader = 0;
+                            } else {
+                                counterHeader = -1;
+                            }
                         }
                     }
                     i++;
                     continue;
                 }
 				else if (c == ',') {
-                    if (counterContent > 0) {
-                        counterContent = -1;
-                        colonShownUp = false;
-						/*std::cout << "currentHeader: " << currentHeader << std::endl;
-						std::cout << "currentContent: " << currentContent << std::endl;*/
-                        updateResponse(currentHeader, currentContent);
-                        currentHeader = "";
-                        currentContent = "";
-                    }
+                    counterHeader = -1;
+                    counterContent = -1;
+                    colonShownUp = false;
+                    /*std::cout << "currentHeader: " << currentHeader << std::endl;
+                    std::cout << "currentContent: " << currentContent << std::endl;*/
+                    System.out.println("currentHeader: " +currentHeader + "  currentContent: "+currentContent);
+
+                    updateResponse(currentHeader, currentContent);
+
+                    currentHeader = "";
+                    currentContent = "";
                     i++;
                     continue;
                 }
 				else if (c == '}') {
+                    counterContent = -1;
+                    counterHeader = -1;
+                    colonShownUp = false;
 					/*std::cout << "currentHeader: " << currentHeader << std::endl;
 					std::cout << "currentContent: " << currentContent << std::endl;*/
+                    System.out.println("currentHeader: " +currentHeader + "  currentContent: "+currentContent);
+
                     updateResponse(currentHeader, currentContent);
+
+                    mSongsData.add(new SongData(currentSongData.name, currentSongData.artist,
+                            currentSongData.score, currentSongData.rank));
+                    currentSongData = new SongData();
+                    currentHeader = "";
+                    currentContent = "";
                     i++;
                     continue;
                 }
@@ -234,21 +253,14 @@ public class HttpRequest extends AsyncTask<Void, Void, Integer> {
                         counterContent++;
                         currentContent = currentContent + c;
                     }
-
                     i++;
                 }
             }
-            mSongsData.add(currentSongData);
-            currentSongData = new SongData();
+
             builder.append(line);
         }
         Log.e(TAG, builder.toString());
-
-//        JsonReader reader = new JsonReader(new InputStreamReader(inputStream, "UTF-8"));
-//        while (reader.hasNext()) {
-//            mSongsData.add(readResponse(reader));
-//            Log.e(TAG, mSongsData.get(0).toString());
-//        }
+        return mSongsData;
     }
 
     public SongData readResponse(JsonReader reader) throws IOException {

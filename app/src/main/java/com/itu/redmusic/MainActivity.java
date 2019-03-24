@@ -34,7 +34,7 @@ public class MainActivity extends Activity{
     UserDao userDao;
     User mCurrentUser;
     HashMap<String, Boolean> mUserIdMap;
-
+    ArrayList<SongData> mSongsData;
     String mPopUpContents[];
 
     @Override
@@ -42,6 +42,7 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mSongsData = new ArrayList<SongData>();
         mNavigationManager = new NavigationManager(getFragmentManager());
         mNavigationManager.startSplashScreen();
         final Handler handler = new Handler();
