@@ -37,11 +37,14 @@
                 android:id="@+id/email_input"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginLeft="@dimen/button_left_right_margin"
                 android:layout_marginTop="@dimen/email_top_margin"
+                android:layout_marginLeft="@dimen/button_left_right_margin"
                 android:layout_marginRight="@dimen/button_left_right_margin"
+                android:paddingLeft="@dimen/input_left_margin"
+                android:paddingRight="@dimen/input_left_margin"
                 android:background="@drawable/round_text_input"
                 android:ems="10"
+                android:textColor="@android:color/white"
                 android:inputType="textEmailAddress" />
 
             <TextView
@@ -61,6 +64,9 @@
                 android:layout_marginTop="@dimen/password_top_margin"
                 android:layout_marginLeft="@dimen/button_left_right_margin"
                 android:layout_marginRight="@dimen/button_left_right_margin"
+                android:paddingLeft="@dimen/input_left_margin"
+                android:paddingRight="@dimen/input_left_margin"
+                android:textColor="@android:color/white"
                 android:background="@drawable/round_text_input"
                 android:inputType="textPassword"
                 android:visibility="visible" />

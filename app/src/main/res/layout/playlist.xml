@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/playlist"
-    android:background="@android:color/black">
+    android:background="@drawable/background"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                 android:layout_gravity="center"
                 android:text="Linkin Park"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@android:color/white"
+                android:textColor="@color/bright_blue"
                 android:textSize="20sp" />
 
             <TextView
@@ -59,8 +60,8 @@
         android:layout_marginTop="@dimen/playlist_margin_top"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/dataRecyclerView"
+        <ListView
+            android:id="@+id/playlistDataListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/playlist_bg"

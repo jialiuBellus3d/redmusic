@@ -1,20 +1,25 @@
 package com.itu.redmusic;
 
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,6 +30,10 @@ public class MainActivity extends Activity{
     public NavigationManager mNavigationManager;
     public MusicPlayer mMusicPlayer;
     public PopupWindow mMenuPopupWindow;
+    UserDatabase mDatabase;
+    UserDao userDao;
+    User mCurrentUser;
+    HashMap<String, Boolean> mUserIdMap;
 
     String mPopUpContents[];
 
@@ -39,8 +48,9 @@ public class MainActivity extends Activity{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-//                mNavigationManager.startSignInFragment();
-                mNavigationManager.startPlayerFragment();
+                mNavigationManager.startSignInFragment();
+//                mNavigationManager.startPlayerFragment();
+//                mNavigationManager.startPlaylistFragment();
             }
         }, 1000);
 
@@ -52,6 +62,9 @@ public class MainActivity extends Activity{
         mPopUpContents = new String[mMenuList.size()];
         mMenuList.toArray(mPopUpContents);
         mMenuPopupWindow = popupWindowDogs();
+
+        mDatabase = UserDatabase.buildDatabase(this);
+        userDao = mDatabase.userDao();
 
 
         // hide the navigation bar for consistent UI
@@ -134,4 +147,16 @@ public class MainActivity extends Activity{
         return popupWindow;
     }
 
+    void loadUserId(){
+        mUserIdMap = new HashMap<String, Boolean>();
+        InputStream inputStream = getResources().openRawResource(R.raw.user);
+        CSVFile csvFile = new CSVFile(inputStream);
+        List idList = csvFile.read();
+        for (int i = 0; i < idList.size(); i++) {
+            String[] res = (String[]) idList.get(i);
+            for(int j = 0; j < res.length; j++){
+                mUserIdMap.put(res[j], false);
+            }
+        }
+    }
 }

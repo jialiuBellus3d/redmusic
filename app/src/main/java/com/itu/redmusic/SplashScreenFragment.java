@@ -19,5 +19,7 @@ public class SplashScreenFragment extends Fragment {
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
+        MainActivity mMainActivity = (MainActivity) getActivity();
+        mMainActivity.loadUserId();
     }
 }

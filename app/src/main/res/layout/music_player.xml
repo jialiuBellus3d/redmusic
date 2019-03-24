@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/music_player"
-    android:src="@drawable/background2">
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="Linkin Park"
+                    android:text="Eminem, Rihanna"
                     android:textColor="@color/dark_blue"
                     android:textSize="@dimen/player_artist_text_size" />
 
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="In the end"
+                    android:text="The Monster"
                     android:textSize="@dimen/player_artist_text_size" />
 
             </LinearLayout>
@@ -147,7 +147,7 @@
                 </LinearLayout>
 
                 <ProgressBar
-                    android:id="@+id/progressBar"
+                    android:id="@+id/playerProgressBar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

@@ -11,12 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import static android.content.ContentValues.TAG;
 
 /**
  * Created by Jia Liu on 3/17/2019.
  */
-public class SignInScreenFragment extends Fragment {
+public class SignUpScreenFragment extends Fragment {
     private MainActivity mMainActivity;
     EditText emailET, passwordET;
 
@@ -24,50 +28,47 @@ public class SignInScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.sign_in, container, false);
+        return inflater.inflate(R.layout.sign_up, container, false);
     }
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         mMainActivity = (MainActivity) getActivity();
-        emailET = view.findViewById(R.id.email_input);
-        passwordET = view.findViewById(R.id.password_input);
 
-        Button signInButton = view.findViewById(R.id.signInButton);
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        Button signUpButton = view.findViewById(R.id.signUpSubmitButton);
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = emailET.getText().toString();
                 String password = passwordET.getText().toString();
                 mMainActivity.mCurrentUser = new User(email, password);
-                new SignInAsyncTask(mMainActivity, mMainActivity.mCurrentUser).execute();
+
+                List<String> keysAsArray = new ArrayList<String>(mMainActivity.mUserIdMap.keySet());
+                Random r = new Random();
+                String randomId = keysAsArray.get(r.nextInt(keysAsArray.size()));
+                boolean randomVal = mMainActivity.mUserIdMap.get(randomId);
+                while(randomVal){
+                    randomId = keysAsArray.get(r.nextInt(keysAsArray.size()));
+                    randomVal = mMainActivity.mUserIdMap.get(randomId);
+                }
+
+                mMainActivity.mCurrentUser.userId = randomId;
+                mMainActivity.mUserIdMap.put(randomId, true);
+                new SignUpAsyncTask(mMainActivity, mMainActivity.mCurrentUser).execute();
             }
         });
 
-        Button forgotButton = view.findViewById(R.id.forgetButton);
-        forgotButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMainActivity.mNavigationManager.startResetPasswordFragment();
-            }
-        });
-
-        Button signUpButton = view.findViewById(R.id.signUpButton);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMainActivity.mNavigationManager.startSignUpFragment();
-            }
-        });
+        emailET = view.findViewById(R.id.signUpEmail_input);
+        passwordET = view.findViewById(R.id.signUpPassword_input);
     }
 
-    private static class SignInAsyncTask extends AsyncTask<Void, Void, Integer> {
+    private static class SignUpAsyncTask extends AsyncTask<Void, Void, Integer> {
 
         //Prevent leak
         private MainActivity mMainActivity;
         private User user;
 
-        public SignInAsyncTask(MainActivity activity, User user) {
+        public SignUpAsyncTask(MainActivity activity, User user) {
             mMainActivity = activity;
             this.user = user;
         }
@@ -76,11 +77,12 @@ public class SignInScreenFragment extends Fragment {
         protected Integer doInBackground(Void... params) {
             UserDao userDao = mMainActivity.userDao;
             User user = userDao.findByEmail(this.user.email);
-            if(user!=null && this.user.password.equals(user.password)){
-                Log.e(TAG, "log in successfully!");
+            if(user==null){
+                Log.e(TAG, "sign up successfully!");
+                userDao.add(user);
                 return 1;
             }
-            Log.e(TAG, "log in failed!");
+            Log.e(TAG, "sign up failed!");
             return 0;
         }
 
@@ -92,11 +94,13 @@ public class SignInScreenFragment extends Fragment {
 
             if (agentsCount > 0) {
                 //2: If it already exists then prompt user
-                Toast.makeText(mMainActivity, "Log in successfully!", Toast.LENGTH_LONG).show();
+                Toast.makeText(mMainActivity, "Sign up successfully!", Toast.LENGTH_LONG).show();
                 mMainActivity.mNavigationManager.startPreferenceFragment();
             } else {
-                Toast.makeText(mMainActivity, "Wrong User Name or Password!", Toast.LENGTH_LONG).show();
+                Toast.makeText(mMainActivity, "User already exist! Please sign in", Toast.LENGTH_LONG).show();
+                mMainActivity.mNavigationManager.startSignInFragment();
             }
         }
     }
+
 }

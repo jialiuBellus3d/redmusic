@@ -32,14 +32,15 @@ public class NavigationManager {
 
     private NavigationListener mNavigationListener;
 
-
     private SplashScreenFragment splashScreen;
     private SignInScreenFragment signInFragment;
+    private SignUpScreenFragment signUpFragment;
     private PreferenceScreenFragment preferenceFragment;
     private PlayerScreenFragment playerFragment;
     private PlaylistScreenFragment playlistFragment;
     private ProfileScreenFragment profileFragment;
     private SettingScreenFragment settingFragment;
+    private ResetPasswordScreenFragment resetPasswordFragment;
 
     /**
      * Initialize the NavigationManager with a FragmentManager, which will be used at the
@@ -72,6 +73,13 @@ public class NavigationManager {
             signInFragment = new SignInScreenFragment();
         }
         open(signInFragment);
+    }
+
+    void startSignUpFragment() {
+        if (signUpFragment == null) {
+            signUpFragment = new SignUpScreenFragment();
+        }
+        open(signUpFragment);
     }
 
     void startPreferenceFragment() {
@@ -107,6 +115,13 @@ public class NavigationManager {
             settingFragment = new SettingScreenFragment();
         }
         open(settingFragment);
+    }
+
+    void startResetPasswordFragment() {
+        if (resetPasswordFragment == null) {
+            resetPasswordFragment = new ResetPasswordScreenFragment();
+        }
+        open(resetPasswordFragment);
     }
     /**
      * Displays the next fragment

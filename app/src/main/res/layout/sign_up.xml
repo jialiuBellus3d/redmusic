@@ -43,6 +43,9 @@
                 android:layout_marginLeft="@dimen/button_left_right_margin"
                 android:layout_marginTop="@dimen/sign_up_email_top_margin"
                 android:layout_marginRight="@dimen/button_left_right_margin"
+                android:paddingLeft="@dimen/input_left_margin"
+                android:paddingRight="@dimen/input_left_margin"
+                android:textColor="@android:color/white"
                 android:background="@drawable/round_text_input"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
@@ -64,6 +67,9 @@
                 android:layout_marginTop="@dimen/sign_up_password_top_margin"
                 android:layout_marginLeft="@dimen/button_left_right_margin"
                 android:layout_marginRight="@dimen/button_left_right_margin"
+                android:paddingLeft="@dimen/input_left_margin"
+                android:paddingRight="@dimen/input_left_margin"
+                android:textColor="@android:color/white"
                 android:background="@drawable/round_text_input"
                 android:inputType="textPassword"
                 android:visibility="visible" />
@@ -85,12 +91,15 @@
                 android:layout_marginTop="@dimen/sign_up_confirm_password_top_margin"
                 android:layout_marginLeft="@dimen/button_left_right_margin"
                 android:layout_marginRight="@dimen/button_left_right_margin"
+                android:paddingLeft="@dimen/input_left_margin"
+                android:paddingRight="@dimen/input_left_margin"
+                android:textColor="@android:color/white"
                 android:background="@drawable/round_text_input"
                 android:inputType="textPassword"
                 android:visibility="visible" />
 
             <Button
-                android:id="@+id/submitButton"
+                android:id="@+id/signUpSubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/sign_up_submit_button_top_margin"
