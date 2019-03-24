@@ -9,6 +9,8 @@ class SongData {
     public float score;
     public int rank;
 
+    public SongData(){};
+
     public SongData(String name, String artist, float score, int rank) {
         this.name = name;
         this.artist = artist;

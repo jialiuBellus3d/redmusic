@@ -57,7 +57,6 @@ public class PlaylistScreenFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object item = adapter.getItem(i);
                 mMainActivity.mNavigationManager.startPlayerFragment();
-
             }
         });
     }

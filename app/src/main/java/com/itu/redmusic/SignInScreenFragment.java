@@ -78,6 +78,7 @@ public class SignInScreenFragment extends Fragment {
             User user = userDao.findByEmail(this.user.email);
             if(user!=null && this.user.password.equals(user.password)){
                 Log.e(TAG, "log in successfully!");
+                mMainActivity.mCurrentUser.userId = user.userId;
                 return 1;
             }
             Log.e(TAG, "log in failed!");
@@ -93,7 +94,9 @@ public class SignInScreenFragment extends Fragment {
             if (agentsCount > 0) {
                 //2: If it already exists then prompt user
                 Toast.makeText(mMainActivity, "Log in successfully!", Toast.LENGTH_LONG).show();
-                mMainActivity.mNavigationManager.startPreferenceFragment();
+                mMainActivity.mNavigationManager.startPlayerFragment();
+                new HttpRequest(mMainActivity, "http://134.209.5.65:5000/retrieve", this.user.userId).execute();
+
             } else {
                 Toast.makeText(mMainActivity, "Wrong User Name or Password!", Toast.LENGTH_LONG).show();
             }
